@@ -29,4 +29,4 @@ Edit the configs that are wrong then:
 ./sync.sh
 ```
 
-To overwrite configs from clone/fork to ~/tf/cfg
+To overwrite configs from repo to `~/tf/cfg`
