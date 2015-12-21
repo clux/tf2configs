@@ -5,15 +5,13 @@ Personal binds, scripts, and settings that do not replicate over steam's cloud s
 First create a shortcut under `~/tf` to your tf directory with all the juicy stuff in it:
 
 ```bash
-cd ~
-ln -s ~/.steam/steam/SteamApps/common/Team\ Fortress\ 2/tf/
+ln -sf .steam/steam/steamapps/common/Team\ Fortress\ 2/tf/ $HOME/tf
 ```
 
 Clone repo, make bash shortcuts available:
 
 ```bash
-cd tf2configs
-echo ". `pwd`/tf2rc" >> ~/.bashrc
+echo "source $PWD/tf2rc" >> ~/.bash_profile
 ```
 
 Then set steam launch options:
@@ -22,11 +20,13 @@ Then set steam launch options:
 -novid -toconsole -nojoy +mat_forcehardwaresync 0
 ```
 
-## Updating
-Edit the configs that are wrong then:
+## Installing configs
+Two ways (from repo pwd):
 
 ```bash
-./sync.sh
-```
+# force overwrite
+cp cfgs/*.cfg ~/tf/cfg/
 
-To overwrite configs from repo to `~/tf/cfg`
+# symlink in place (changes version controlled)
+find "$PWD" -name "*.cfg" -type f -print -exec ln -sfn {} ~/tf/cfg/ \;
+```
