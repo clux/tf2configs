@@ -2,31 +2,25 @@
 Personal binds, scripts, and settings that do not replicate over steam's cloud sync. This is for linux.
 
 ## Installation
-First create a shortcut under `~/tf` to your tf directory with all the juicy stuff in it:
+Create a convenience symlink, link all your configs into `cfg` directory, and add shell helpers:
 
 ```bash
 ln -sf .steam/steam/steamapps/common/Team\ Fortress\ 2/tf/ $HOME/tf
-```
-
-Clone repo, make bash shortcuts available:
-
-```bash
-echo "source $PWD/tf2rc" >> ~/.bash_profile
+find "$PWD" -name "*.cfg" -type f -print -exec ln -sfn {} ~/tf/cfg/ \;
+# alternatively: cp cfgs/*.cfg ~/tf/cfg/
 ```
 
 Then set steam launch options:
 
-```
--novid -toconsole -nojoy +mat_forcehardwaresync 0
+```conf
+-novid -console -nojoy +mat_forcehardwaresync 0
 ```
 
-## Installing configs
-Two ways (from repo pwd):
+Remember to turn of vsync + tweak timers in nvidia settings for better performance.
+
+## Useful stuff
 
 ```bash
-# force overwrite
-cp cfgs/*.cfg ~/tf/cfg/
-
-# symlink in place (changes version controlled)
-find "$PWD" -name "*.cfg" -type f -print -exec ln -sfn {} ~/tf/cfg/ \;
+# last demos
+find ~/tf/ -name "*.dem" -printf "%Tx %p\n" | sort -r | ccze -A | less -RX
 ```
